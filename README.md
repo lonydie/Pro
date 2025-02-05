@@ -1,2 +1,1 @@
-# Pro
-The repo for Game project of Group 2. 
+#Work hard and don't forget to commit changes when you are finished#
