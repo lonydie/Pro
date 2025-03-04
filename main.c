@@ -11,12 +11,12 @@
 
 int main()
 {
-    SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO );
+    SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
     TTF_Init();
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
     SDL_Surface *screen;
     Mix_Chunk *SoundEffect = Mix_LoadWAV("Sounds and music/hov.wav");
-    screen = SDL_SetVideoMode(1920, 1080, 32, SDL_HWSURFACE);
+    screen = SDL_SetVideoMode(1344, 756, 32, SDL_HWSURFACE);
     SaveMenu savemenu, loadmenu;
     undermenu1 multsingmenu;
     undermenu2 inputmenu;
@@ -28,16 +28,16 @@ int main()
     Numpad ayuib;*/
     int currentVolume = MIX_MAX_VOLUME;
 
-    initmain(&main);
-    Inisialise_omain1(&Opm);
+
+    initmain(&main, 1);
+    Inisialise_omain1(&Opm, 1);
     InitializeSaveMenu(&savemenu);
     InitializeLoadMenu(&loadmenu);
-    initializeundermenu1(&multsingmenu);
-    initializeundermenu2(&inputmenu);
+    initializeundermenu1(&multsingmenu, 1);
+    initializeundermenu2(&inputmenu, 1);
     initMenu1(&Usermenu);
     initMenu2(&Highmenu);
-    initializeundermenu1(&multsingmenu);
-    initializeundermenu2(&inputmenu);
+
     /*InitializeMainMenu(&ayoub);
     InitializeNumpad(&ayuib);*/
     Mix_Music *sound;
@@ -330,7 +330,7 @@ int main()
 
 
 
-           /////////////////////////////////////////////////
+           //////////////////////////////////////////////////////////////////////////////////
 
             if (Event.type == SDL_MOUSEBUTTONDOWN && Event.button.button == SDL_BUTTON_LEFT)
             {
@@ -340,14 +340,31 @@ int main()
                         if (main.playflag) menu = 3, main.playflag = 0;
                         if (main.optionflag) menu = 2, main.optionflag = 0;
                         if (main.historyflag) menu = 1, main.historyflag = 0;
-                        if (main.highflag) menu = 7, main.highflag = 0;
+                        //if (main.highflag) menu = 7, main.highflag = 0;
                         if (main.exitflag) quit = 1, main.exitflag =0;
                         break;
                     case 2:
                         if (Opm.increaseflag) currentVolume += 10, Mix_VolumeMusic(currentVolume);
                         if(Opm.decreaseflag) currentVolume -=10, Mix_VolumeMusic(currentVolume);
-                        if (Opm.fullscreenflag) screen = SDL_SetVideoMode(1920, 1080, 32, SDL_HWSURFACE);
-                        if (Opm.normalflag) screen = SDL_SetVideoMode(1260, 720, 32, SDL_HWSURFACE);
+                        if (Opm.fullscreenflag)
+                        {
+                            screen = SDL_SetVideoMode(1920, 1080, 32, SDL_HWSURFACE | SDL_FULLSCREEN);
+                            initmain(&main, 0);
+                            Inisialise_omain1(&Opm, 0);
+                            initializeundermenu1(&multsingmenu, 0);
+                            initializeundermenu2(&inputmenu, 0);
+                        }
+
+
+                        if (Opm.normalflag)
+                        {
+                            screen = SDL_SetVideoMode(1250, 720, 32, SDL_HWSURFACE );
+                            initmain(&main, 1);
+                            Inisialise_omain1(&Opm, 1);
+                            initializeundermenu1(&multsingmenu, 1);
+                            initializeundermenu2(&inputmenu, 1);
+                        }
+
                         if (Opm.quitflag) menu = 1, Opm.quitflag = 0;
                         break;
                     case 3:
@@ -356,7 +373,7 @@ int main()
                         if (multsingmenu.spflag) menu = 4, multsingmenu.spflag = 0;
                         break;
                     case 4:
-                        if (inputmenu.re1flag) menu = 3;
+                        if (inputmenu.re1flag) menu = 3, inputmenu.re1flag = 0;
                         break;
 
                 }

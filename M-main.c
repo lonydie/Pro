@@ -4,49 +4,51 @@
 #include <SDL/SDL_mixer.h>
 #include <SDL/SDL_ttf.h>
 
-void initmain(mainmenu *m){
-m->back=IMG_Load("BackGrounds/MainMenu.png");
+void initmain(mainmenu *m, int fullscreen){
+m->back[0]=IMG_Load("BackGrounds/MainMenu.png");
+m->back[1]=IMG_Load("BackGrounds/MainMenu70.png");
 m->posback.x=0;
 m->posback.y=0;
+m->backflag = fullscreen;
 m->play[0]=IMG_Load("Buttons/MainMenuButton.jpeg");
 m->play[1]=IMG_Load("Buttons/HoverOverMainMenuButton.jpeg");
-m->posplay.x=100;
-m->posplay.y=300;
+m->posplay.x= m->back[fullscreen]->w / 19.2;
+m->posplay.y=m->back[fullscreen]->h / 5;
 m->playflag=0;
 m->option[0]=IMG_Load("Buttons/MainMenuButton.jpeg");
 m->option[1]=IMG_Load("Buttons/HoverOverMainMenuButton.jpeg");
-m->posoption.x=100;
-m->posoption.y=400;
+m->posoption.x=m->back[fullscreen]->w / 19.2;
+m->posoption.y=m->posplay.y + 100;
 m->optionflag=0;
 m->high[0]=IMG_Load("Buttons/MainMenuButton.jpeg");
 m->high[1]=IMG_Load("Buttons/HoverOverMainMenuButton.jpeg");
-m->poshigh.x=100;
-m->poshigh.y=500;
+m->poshigh.x=m->back[fullscreen]->w / 19.2;
+m->poshigh.y=m->posoption.y + 100;
 m->highflag=0;
 m->history[0]=IMG_Load("Buttons/MainMenuButton.jpeg");
 m->history[1]=IMG_Load("Buttons/HoverOverMainMenuButton.jpeg");
-m->poshistory.x=100;
-m->poshistory.y=600;
+m->poshistory.x= m->back[fullscreen]->w / 19.2;
+m->poshistory.y=m->poshigh.y + 100;
 m->historyflag=0;
 m->exit[0]=IMG_Load("Buttons/MainMenuButton.jpeg");
 m->exit[1]=IMG_Load("Buttons/HoverOverMainMenuButton.jpeg");
-m->posexit.x=100;
-m->posexit.y=730;
+m->posexit.x=m ->back[fullscreen]->w / 19.2;
+m->posexit.y=m->poshistory.y + 150;
 m->exitflag=0;
 m->font=TTF_OpenFont("Fonts/VT323-Regular.ttf",24);
-m->textColor.r = 50;
-m->textColor.g = 200;
-m->textColor.b = 50;
-m->postxt1.x=150;
-m->postxt1.y=330;
-m->postxt2.x=150;
-m->postxt2.y=430;
-m->postxt3.x=150;
-m->postxt3.y=530;
-m->postxt4.x=150;
-m->postxt4.y=630;
-m->postxt5.x=150;
-m->postxt5.y=760;
+m->textColor.r = 0;
+m->textColor.g = 0;
+m->textColor.b = 255;
+m->postxt1.x = m->posplay.x + 50;
+m->postxt1.y = m->posplay.y + 20;
+m->postxt2.x = m->posoption.x + 50;
+m->postxt2.y = m->posoption.y + 20;
+m->postxt3.x = m->poshigh.x + 50;
+m->postxt3.y = m->poshigh.y + 20;
+m->postxt4.x = m->poshistory.x + 50;
+m->postxt4.y = m->poshistory.y + 20;
+m->postxt5.x = m->posexit.x + 50;
+m->postxt5.y = m->posexit.y + 20;
 m->textplay=TTF_RenderText_Blended(m->font,"play",m->textColor);
 m->textoption=TTF_RenderText_Blended(m->font,"option",m->textColor);
 m->texthigh=TTF_RenderText_Blended(m->font,"high score",m->textColor);
@@ -57,7 +59,7 @@ m->textexit=TTF_RenderText_Blended(m->font,"exit",m->textColor);
 
 
 void displaymain(mainmenu m, SDL_Surface *screen){
-SDL_BlitSurface(m.back, NULL,screen, &m.posback);
+SDL_BlitSurface(m.back[m.backflag], NULL,screen, &m.posback);
 SDL_BlitSurface(m.play[m.playflag],NULL,screen,&m.posplay);
 SDL_BlitSurface(m.option[m.optionflag], NULL,screen, &m.posoption);
 SDL_BlitSurface(m.high[m.highflag], NULL,screen, &m.poshigh);

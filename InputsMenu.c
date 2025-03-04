@@ -4,29 +4,31 @@
 #include <SDL/SDL_ttf.h>
 #include "InputsMenu.h"
 
-void initializeundermenu1(undermenu1 *um) {
-    um->background1 = IMG_Load("BackGrounds/SubMenu.png");
+void initializeundermenu1(undermenu1 *um, int fullscreen) {
+    um->background1[0] = IMG_Load("BackGrounds/SubMenu.png");
+    um->background1[1] = IMG_Load("BackGrounds/SubMenu70.png");
+    um->backflag = fullscreen;
 
     um->posback1.x = 0;
     um->posback1.y = 0;
     um->sp[0] = IMG_Load("Buttons/Button.png");
     um->sp[1] = IMG_Load("Buttons/HoveredOverButton.png");
-    um->possp.x = 1000;
-    um->possp.y = 400;
+    um->possp.x = um->background1[fullscreen]->w / 1.92;
+    um->possp.y = um->background1[fullscreen]->h / 2.7;
     um->spflag = 0;
 
 
     um->mp[0] = IMG_Load("Buttons/Button.png");
     um->mp[1] = IMG_Load("Buttons/HoveredOverButton.png");
-    um->posmp.x = 700;
-    um->posmp.y = 400;
+    um->posmp.x = um->background1[fullscreen]->w / 3.2;
+    um->posmp.y = um->background1[fullscreen]->h / 2.7;
     um->mpflag = 0;
 
 
     um->re[0] = IMG_Load("Buttons/Button.png");
     um->re[1] = IMG_Load("Buttons/HoveredOverButton.png");
-    um->posre.x = 470;
-    um->posre.y = 700;
+    um->posre.x = um->background1[fullscreen]->w / 4;
+    um->posre.y = um->background1[fullscreen]->h / 1.6;
     um->reflag = 0;
 
 
@@ -38,7 +40,7 @@ void initializeundermenu1(undermenu1 *um) {
     um->postxt3.y = um->posre.y + 20;
 
 
-    um->font = TTF_OpenFont("Fonts/VT323-Regular.ttf", 24);
+    um->font = TTF_OpenFont("Fonts/VT323-Regular.ttf", 30);
     um->textColor.r = 0;
     um->textColor.g = 0;
     um->textColor.b = 0;
@@ -49,7 +51,7 @@ void initializeundermenu1(undermenu1 *um) {
 }
 
 void displayundermenu1(undermenu1 um, SDL_Surface *screen) {
-    SDL_BlitSurface(um.background1, NULL, screen, &um.posback1);
+    SDL_BlitSurface(um.background1[um.backflag], NULL, screen, &um.posback1);
     SDL_BlitSurface(um.sp[um.spflag], NULL, screen, &um.possp);
     SDL_BlitSurface(um.mp[um.mpflag], NULL, screen, &um.posmp);
     SDL_BlitSurface(um.re[um.reflag], NULL, screen, &um.posre);
@@ -58,49 +60,52 @@ void displayundermenu1(undermenu1 um, SDL_Surface *screen) {
     SDL_BlitSurface(um.textre, NULL, screen, &um.postxt3);
 }
 
-void initializeundermenu2(undermenu2 *um) {
-    um->background2 = IMG_Load("BackGrounds/SubMenu.png");
+void initializeundermenu2(undermenu2 *um, int fullscreen) {
+    um->background2[0] = IMG_Load("BackGrounds/SubMenu.png");
+    um->background2[1] = IMG_Load("BackGrounds/SubMenu70.png");
     um->posback2.x = 0;
     um->posback2.y = 0;
+    um->backflag = fullscreen;
 
 
     um->av1[0] = IMG_Load("Buttons/Button.png");
     um->av1[1] = IMG_Load("Buttons/HoveredOverButton.png");
-    um->posav1.x = 1000;
-    um->posav1.y = 400;
+    um->posav1.x = um->background2[fullscreen]->w / 1.8;
+    um->posav1.y = um->background2[fullscreen]->h / 2;
     um->av1flag = 0;
   ;
 
     um->av3[0] = IMG_Load("Buttons/Button.png");
     um->av3[1] = IMG_Load("Buttons/HoveredOverButton.png");
-    um->posav3.x = 1000;
-    um->posav3.y = 300;
+    um->posav3.x = um->background2[fullscreen]->w / 3.2;
+    um->posav3.y = um->background2[fullscreen]->h / 2.8;
     um->av3flag = 0;
 
 
     um->av4[0] = IMG_Load("Buttons/Button.png");
     um->av4[1] = IMG_Load("Buttons/HoveredOverButton.png");
-    um->posav4.x = 700;
-    um->posav4.y = 300;
+    um->posav4.x = um->background2[fullscreen]->w / 1.8;
+    um->posav4.y = um->background2[fullscreen]->h / 2.8;
     um->av4flag = 0;
 
 
     um->av2[0] = IMG_Load("Buttons/Button.png");
     um->av2[1] = IMG_Load("Buttons/HoveredOverButton.png");
-    um->posav2.x = 700;
-    um->posav2.y = 400;
+    um->posav2.x = um->background2[fullscreen]->w / 3.2;
+    um->posav2.y = um->background2[fullscreen]->h / 2;
     um->av2flag = 0;
 
 
     um->val[0] = IMG_Load("Buttons/Button.png");
     um->val[1] = IMG_Load("Buttons/HoveredOverButton.png");
-    um->posval.x = 850;
-    um->posval.y = 550;
+    um->posval.x = um->background2[fullscreen]->w / 1.7;
+    um->posval.y = um->background2[fullscreen]->h / 1.6;
     um->valflag = 0;
+
     um->re1[0] = IMG_Load("Buttons/Button.png");
     um->re1[1] = IMG_Load("Buttons/HoveredOverButton.png");
-    um->posre1.x = 470;
-    um->posre1.y = 700;
+    um->posre1.x = um->background2[fullscreen]->w / 4;
+    um->posre1.y = um->background2[fullscreen]->h / 1.6;
     um->re1flag = 0;
 
 
@@ -119,12 +124,12 @@ void initializeundermenu2(undermenu2 *um) {
     um->postxt7.x = um->posre1.x + 50;
     um->postxt7.y = um->posre1.y + 20;
 
-    um->font = TTF_OpenFont("Fonts/VT323-Regular.ttf", 24);
+    um->font = TTF_OpenFont("Fonts/VT323-Regular.ttf", 30);
     um->textColor.r = 0;
     um->textColor.g = 0;
     um->textColor.b = 0;
 
-    um->textav3 = TTF_RenderText_Blended(um->font, "avatar1", um->textColor);
+    um->textav3 = TTF_RenderText_Blended(um->font, "avatar 1", um->textColor);
     um->textav4 = TTF_RenderText_Blended(um->font, "avatar2", um->textColor);
     um->textin1 = TTF_RenderText_Blended(um->font, "input1", um->textColor);
     um->textin2 = TTF_RenderText_Blended(um->font, "input2", um->textColor);
@@ -133,7 +138,7 @@ void initializeundermenu2(undermenu2 *um) {
 }
 
 void displayundermenu2(undermenu2 um, SDL_Surface *screen) {
-    SDL_BlitSurface(um.background2, NULL, screen, &um.posback2);
+    SDL_BlitSurface(um.background2[um.backflag], NULL, screen, &um.posback2);
     SDL_BlitSurface(um.av1[um.av1flag], NULL, screen, &um.posav1);
     SDL_BlitSurface(um.av2[um.av2flag], NULL, screen, &um.posav2);
     SDL_BlitSurface(um.re1[um.re1flag], NULL, screen, &um.posre1);

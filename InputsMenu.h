@@ -3,9 +3,9 @@
 #include <SDL/SDL_ttf.h>
 typedef struct
 {
-    SDL_Surface *background1;
+    SDL_Surface *background1[2];
     SDL_Rect posback1;
-    Mix_Music *musicback1;
+    int backflag;
     SDL_Surface *sp[2];
     SDL_Rect possp;
     int spflag;
@@ -28,9 +28,9 @@ typedef struct
 
 typedef struct
 {
-    SDL_Surface *background2;
+    SDL_Surface *background2[2];
     SDL_Rect posback2;
-    Mix_Music *musicback2;
+    int backflag;
     SDL_Surface *av1[2];
     SDL_Rect posav1;
     int av1flag;
@@ -66,7 +66,7 @@ typedef struct
     SDL_Rect postxt7;
 }undermenu2;
 
-void initializeundermenu1(undermenu1 *um);
+void initializeundermenu1(undermenu1 *um, int fullscreen);
 void displayundermenu1(undermenu1 um,SDL_Surface *screen);
-void initializeundermenu2(undermenu2 *um);
+void initializeundermenu2(undermenu2 *um, int fullscreen);
 void displayundermenu2(undermenu2 um,SDL_Surface *screen);

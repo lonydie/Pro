@@ -5,9 +5,9 @@
 
 typedef struct
 {
-	SDL_Surface *back;
+	SDL_Surface *back[2];
 	SDL_Rect posback;
-	Mix_Music *musicback1;
+    int backflag;
 	SDL_Surface *play[2];
 	SDL_Rect posplay;
 	int playflag;
@@ -22,7 +22,7 @@ typedef struct
 	int historyflag;
 	SDL_Surface *exit[2];
 	SDL_Rect posexit;
-	int exitflag;	
+	int exitflag;
 	TTF_Font *font;
 	SDL_Color textColor;
 	SDL_Surface *textplay;
@@ -37,5 +37,5 @@ typedef struct
 	SDL_Rect postxt5;
 }mainmenu;
 
-void initmain(mainmenu *m);
+void initmain(mainmenu *m, int fullscreen);
 void displaymain(mainmenu m, SDL_Surface *screen);
