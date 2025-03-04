@@ -147,7 +147,7 @@ int main()
                         if (Event.motion.x > Opm.quitpos.x && Event.motion.x < Opm.quitpos.x + Opm.quit[0]->w &&
                             Event.motion.y > Opm.quitpos.y && Event.motion.y < Opm.quitpos.y + Opm.quit[0]->h)
                         {
-                            if (Opm.increaseflag == 0) Mix_PlayChannel(-1, SoundEffect, 0);
+                            if (Opm.quitflag == 0) Mix_PlayChannel(-1, SoundEffect, 0);
                             Opm.quitflag = 1;
                         }
                         else Opm.quitflag = 0;
