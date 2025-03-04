@@ -15,7 +15,7 @@ int main()
     TTF_Init();
     Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024);
     SDL_Surface *screen;
-    Mix_Chunk *SoundEffect = Mix_LoadWAV("Sounds and music/hov.wav");
+    Mix_Chunk *SoundEffect = Mix_LoadWAV("Sounds and music/SoundEffectHover.wav");
     screen = SDL_SetVideoMode(1344, 756, 32, SDL_HWSURFACE);
     SaveMenu savemenu, loadmenu;
     undermenu1 multsingmenu;
@@ -27,6 +27,8 @@ int main()
     /*MainMenu ayoub;
     Numpad ayuib;*/
     int currentVolume = MIX_MAX_VOLUME;
+
+
 
 
     initmain(&main, 1);
@@ -43,6 +45,7 @@ int main()
     Mix_Music *sound;
 	sound = Mix_LoadMUS("Sounds and music/BackGroundMusic.mp3");
     Mix_PlayMusic(sound, -1);
+    Mix_VolumeMusic(currentVolume);
     int quit = 0;
     SDL_Event Event;
     int menu = 1;
@@ -343,9 +346,13 @@ int main()
                         //if (main.highflag) menu = 7, main.highflag = 0;
                         if (main.exitflag) quit = 1, main.exitflag =0;
                         break;
+
                     case 2:
-                        if (Opm.increaseflag) currentVolume += 10, Mix_VolumeMusic(currentVolume);
-                        if(Opm.decreaseflag) currentVolume -=10, Mix_VolumeMusic(currentVolume);
+                        if (Opm.increaseflag && currentVolume  < 128)  currentVolume += 4, Mix_VolumeMusic(currentVolume), Mix_VolumeChunk(SoundEffect, currentVolume);
+                        if(Opm.decreaseflag && currentVolume > 0) currentVolume -= 4, Mix_VolumeMusic(currentVolume), Mix_VolumeChunk(SoundEffect, currentVolume);
+                       // printf("%d \n", currentVolume );
+
+
                         if (Opm.fullscreenflag)
                         {
                             screen = SDL_SetVideoMode(1920, 1080, 32, SDL_HWSURFACE | SDL_FULLSCREEN);
@@ -358,7 +365,7 @@ int main()
 
                         if (Opm.normalflag)
                         {
-                            screen = SDL_SetVideoMode(1250, 720, 32, SDL_HWSURFACE );
+                            screen = SDL_SetVideoMode(1344, 756, 32, SDL_HWSURFACE );
                             initmain(&main, 1);
                             Inisialise_omain1(&Opm, 1);
                             initializeundermenu1(&multsingmenu, 1);
@@ -367,11 +374,13 @@ int main()
 
                         if (Opm.quitflag) menu = 1, Opm.quitflag = 0;
                         break;
+
                     case 3:
                         if (multsingmenu.reflag) menu  = 1, multsingmenu.reflag = 0;
                         if (multsingmenu.mpflag) menu = 4, multsingmenu.mpflag = 0;
                         if (multsingmenu.spflag) menu = 4, multsingmenu.spflag = 0;
                         break;
+
                     case 4:
                         if (inputmenu.re1flag) menu = 3, inputmenu.re1flag = 0;
                         break;
